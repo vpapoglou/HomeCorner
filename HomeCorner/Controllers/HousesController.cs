@@ -12,12 +12,13 @@ namespace HomeCorner.Controllers
 {
     public class HousesController : Controller
     {
+        private HomeCornerContext db = new HomeCornerContext();
+
         // GET: Houses
         public ActionResult Index()
         {
-            var houses = HouseDb.GetAll();
 
-            return View(houses);
+            return View(db.Houses.ToList());
         }
     }
 }
