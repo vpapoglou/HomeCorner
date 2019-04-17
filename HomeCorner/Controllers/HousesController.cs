@@ -20,5 +20,25 @@ namespace HomeCorner.Controllers
 
             return View(db.Houses.ToList());
         }
+
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Name")] House house)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Houses.Add(house);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(house);
+        }
     }
 }
