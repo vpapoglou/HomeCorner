@@ -10,12 +10,14 @@ namespace HomeCorner.Controllers
 {
     public class CustomersController : Controller
     {
+        private HomeCornerContext db = new HomeCornerContext();
+
         // GET: Customers
         public ActionResult Index()
         {
             var customers = CustomerDb.GetAll();
 
-            return View(customers);
+            return View(db.Customers.ToList());
         }
     }
 }
