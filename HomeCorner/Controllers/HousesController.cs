@@ -43,6 +43,21 @@ namespace HomeCorner.Controllers
             return View();
         }
 
+        // GET: Houses/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            House house = db.Houses.Find(id);
+            if (house == null)
+            {
+                return HttpNotFound();
+            }
+            return View(house);
+        }
+
         // GET: Houses/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -55,8 +70,8 @@ namespace HomeCorner.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HouseId = new SelectList(db.Houses, "Id", "Name", house.Id);
-            return View();
+            ViewBag.Id = new SelectList(db.Houses, "Id", "Name", house.Id);
+            return View(house);
         }
 
         // POST: Houses/Edit/5
@@ -64,7 +79,7 @@ namespace HomeCorner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Region,Address")] House house)
+        public ActionResult Edit([Bind(Include = "Id,Name,Region,Address, ReleaseDate, Price")] House house)
         {
             if (ModelState.IsValid)
             {
@@ -76,22 +91,22 @@ namespace HomeCorner.Controllers
             return View();
         }
 
-        // GET: Movies/Delete/5
+        // GET: Houses/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            House movie = db.Houses.Find(id);
-            if (movie == null)
+            House house = db.Houses.Find(id);
+            if (house == null)
             {
                 return HttpNotFound();
             }
-            return View();
+            return View(house);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Houses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
