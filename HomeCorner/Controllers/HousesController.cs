@@ -31,7 +31,7 @@ namespace HomeCorner.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Region,Address,ReleaseDate,Price")] House house)
+        public ActionResult Create([Bind(Include = "Id,Name,Region,Address,ReleaseDate,Price,OwnerId")] House house)
         {
             if (ModelState.IsValid)
             {
