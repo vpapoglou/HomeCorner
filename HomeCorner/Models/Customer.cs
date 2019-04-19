@@ -25,5 +25,7 @@ namespace HomeCorner.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
+        public ICollection<House> Houses { get; set; }
     }
 }

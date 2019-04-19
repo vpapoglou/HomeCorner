@@ -25,5 +25,15 @@ namespace HomeCorner.Models
 		/// Collection managing customers
 		/// </summary>
 		public DbSet<Customer> Customers { get; set; }
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+			// configures one-to-many relationship
+			modelBuilder.Entity<House>()
+				.HasRequired<Customer>(s => s.Owner)
+				.WithMany(g => g.Houses)
+				.HasForeignKey<int>(s => s.OwnerId)
+				.WillCascadeOnDelete();
+		}
 	}
 }
