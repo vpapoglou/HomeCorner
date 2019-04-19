@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace HomeCorner.Models
 	public class HomeCornerContext : DbContext
 	{
 		// We need to replace this value with the appropriate value that points to the local database
-		const string connectionString = @"Data Source=DESKTOP-M08V3JF\SQLEXPRESS;Initial Catalog=HomeCorner;Integrated Security=True";
+		const string connectionString = @"Data Source=TAMARA-PC\SQLEXPRESS;Initial Catalog=HomeCorner;Integrated Security=True";
 
 		public HomeCornerContext() : base(connectionString) { }
 
