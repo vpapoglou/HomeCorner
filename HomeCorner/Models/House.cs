@@ -24,5 +24,7 @@ namespace HomeCorner.Models
 
         public int OwnerId { get; set; }
 
+        public Customer Owner { get; set; }
+
     }
 }
