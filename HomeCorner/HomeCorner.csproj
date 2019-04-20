@@ -147,6 +147,10 @@
     <Compile Include="Migrations\201904181103412_Initial1.Designer.cs">
       <DependentUpon>201904181103412_Initial1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904201058302_Initial3.cs" />
+    <Compile Include="Migrations\201904201058302_Initial3.Designer.cs">
+      <DependentUpon>201904201058302_Initial3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\HomeCornerContext.cs" />
@@ -230,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904181103412_Initial1.resx">
       <DependentUpon>201904181103412_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904201058302_Initial3.resx">
+      <DependentUpon>201904201058302_Initial3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
