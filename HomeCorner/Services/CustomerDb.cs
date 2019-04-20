@@ -8,36 +8,50 @@ namespace HomeCorner.Services
 {
     public class CustomerDb
     {
-        private static IList<Customer> _db = new List<Customer>()
+        public static IEnumerable<Customer> GetAll()
         {
-            new Customer() { Id = 1, Name = "Papadopoulos Nikos" },
-            new Customer() { Id = 2, Name = "Kikos Kikou" },
-            new Customer() { Id = 3, Name = "Helen De Arams" },
-        };
-        public static IList<Customer> GetAll()
-        {
-            return _db;
+            using (var context = new HomeCornerContext())
+            {
+                return context.Customers.Include("Customer").ToList();
+            }
         }
+        public static Customer GetById(int Id)
+        {
+            using (var context = new HomeCornerContext())
+            {
+                return context.Customers.Include("Customer").SingleOrDefault(m => m.Id == Id);
+            }
+        }
+
         public static void Add(Customer customer)
         {
-            var rnd = new Random();
-            customer.Id = rnd.Next(1, 1000);
-            _db.Add(customer);
+            using (var context = new HomeCornerContext())
+            {
+                context.Customers.Add(customer);
+                context.SaveChanges();
+            }
         }
 
         public static void Update(Customer customer)
         {
-
+            using (var context = new HomeCornerContext())
+            {
+                Customer customerToUpdate = context.Customers.Find(customer.Id);
+                customer.Id = customer.Id;
+                customerToUpdate.Name = customer.Name;
+                customerToUpdate.Address = customer.Address;
+                context.SaveChanges();
+            }
         }
 
-        public static void Delete(Customer customer)
+        public static void Delete(int id)
         {
-            _db.Remove(customer);
-        }
-
-        public static Customer GetById(int Id)
-        {
-            return _db.FirstOrDefault(c => c.Id == Id);
+            using (var context = new HomeCornerContext())
+            {
+                Customer customer = context.Customers.Find(id);
+                context.Customers.Remove(customer);
+                context.SaveChanges();
+            }
         }
     }
 }

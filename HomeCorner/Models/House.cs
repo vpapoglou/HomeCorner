@@ -8,14 +8,14 @@ namespace HomeCorner.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Please, provide a description")]
+        //[Required(ErrorMessage = "Please, provide a description")]
         [Display(Name = "Description")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Please, provide a Region")]
+        //[Required(ErrorMessage = "Please, provide a Region")]
         public string Region { get; set; }
 
-        [Required(ErrorMessage = "Please, provide an Address")]
+        //[Required(ErrorMessage = "Please, provide an Address")]
         public string Address { get; set; }
 
         public DateTime ReleaseDate { get; set; }
@@ -23,6 +23,8 @@ namespace HomeCorner.Models
         public decimal Price { get; set; }
 
         public int OwnerId { get; set; }
+
+        public Customer Owner { get; set; }
 
     }
 }
