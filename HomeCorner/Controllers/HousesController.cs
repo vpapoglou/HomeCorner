@@ -79,7 +79,7 @@ namespace HomeCorner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Region, Address, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability")] House house)
+        public ActionResult Edit([Bind(Include = "Id, Region, Address, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability")] House house)
         {
             if (ModelState.IsValid)
             {
@@ -87,8 +87,8 @@ namespace HomeCorner.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability", house.Id);
-            return View();
+            ViewBag.Id = new SelectList(db.Houses, "Id", "Title", house.Id);
+            return View(house);
         }
 
         // GET: Houses/Delete/5

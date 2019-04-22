@@ -11,7 +11,6 @@ namespace HomeCorner.Models
         public string Title { get; set; }
 
         //[Required(ErrorMessage = "Please, provide a description")]
-        [Display(Name = "Description")]
         public string Description { get; set; }
 
         //[Required(ErrorMessage = "Please, provide a Region")]
