@@ -26,15 +26,7 @@ namespace HomeCorner.Models
 
         public decimal Price { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
-
         public DateTime Availability { get; set; }
-
-        //public string OwnerName { get; set; }
-
-        //public string Email { get; set; }
-
-        //public int PhoneNumber { get; set; }
 
         public int OwnerId { get; set; }
 

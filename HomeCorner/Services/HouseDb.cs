@@ -39,7 +39,7 @@ namespace HomeCorner.Services
                 House houseToUpdate = context.Houses.Find(house.Id);
                 house.Id = house.Id;
                 houseToUpdate.Description = house.Description;
-                houseToUpdate.ReleaseDate = house.ReleaseDate;
+
                 context.SaveChanges();
             }
         }
