@@ -25,7 +25,7 @@ namespace HomeCorner.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "ReleaseDate", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability");
+            //ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "ReleaseDate", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability");
             return View();
         }
 
@@ -70,7 +70,7 @@ namespace HomeCorner.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "ReleaseDate", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability", house.Id);
+           // ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "ReleaseDate", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability", house.Id);
             return View(house);
         }
 
