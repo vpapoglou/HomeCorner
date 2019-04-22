@@ -159,6 +159,10 @@
     <Compile Include="Migrations\201904211201060_ChangeCreateForm2.Designer.cs">
       <DependentUpon>201904211201060_ChangeCreateForm2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904221303070_RemovedReleaseDateField.cs" />
+    <Compile Include="Migrations\201904221303070_RemovedReleaseDateField.Designer.cs">
+      <DependentUpon>201904221303070_RemovedReleaseDateField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\HomeCornerContext.cs" />
@@ -251,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904211201060_ChangeCreateForm2.resx">
       <DependentUpon>201904211201060_ChangeCreateForm2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904221303070_RemovedReleaseDateField.resx">
+      <DependentUpon>201904221303070_RemovedReleaseDateField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -25,13 +25,13 @@ namespace HomeCorner.Controllers
 
         public ActionResult Create()
         {
-            //ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "ReleaseDate", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability");
+            //ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, Region, Address, ReleaseDate, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability")] House house)
+        public ActionResult Create([Bind(Include = "Id, Region, Address, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability")] House house)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace HomeCorner.Controllers
             {
                 return HttpNotFound();
             }
-           // ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "ReleaseDate", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability", house.Id);
+            //ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability", house.Id);
             return View(house);
         }
 
@@ -79,7 +79,7 @@ namespace HomeCorner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, Region, Address, ReleaseDate, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability")] House house)
+        public ActionResult Edit([Bind(Include = "Region, Address, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability")] House house)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace HomeCorner.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.Houses, "Id", "Name", house.Id);
+            //ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability", house.Id);
             return View();
         }
 
