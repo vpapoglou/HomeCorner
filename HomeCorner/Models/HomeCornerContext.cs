@@ -26,6 +26,8 @@ namespace HomeCorner.Models
 		/// </summary>
 		public DbSet<Customer> Customers { get; set; }
 
+        public DbSet<Features> Features { get; set; }
+
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			// configures one-to-many relationship

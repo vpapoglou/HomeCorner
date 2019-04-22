@@ -163,8 +163,17 @@
     <Compile Include="Migrations\201904221303070_RemovedReleaseDateField.Designer.cs">
       <DependentUpon>201904221303070_RemovedReleaseDateField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904222121079_addFeatures.cs" />
+    <Compile Include="Migrations\201904222121079_addFeatures.Designer.cs">
+      <DependentUpon>201904222121079_addFeatures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904222136066_connectingFeaturesHouses.cs" />
+    <Compile Include="Migrations\201904222136066_connectingFeaturesHouses.Designer.cs">
+      <DependentUpon>201904222136066_connectingFeaturesHouses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Features.cs" />
     <Compile Include="Models\HomeCornerContext.cs" />
     <Compile Include="Models\House.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -258,6 +267,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904221303070_RemovedReleaseDateField.resx">
       <DependentUpon>201904221303070_RemovedReleaseDateField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904222121079_addFeatures.resx">
+      <DependentUpon>201904222121079_addFeatures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904222136066_connectingFeaturesHouses.resx">
+      <DependentUpon>201904222136066_connectingFeaturesHouses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

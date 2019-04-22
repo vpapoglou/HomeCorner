@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -6,6 +7,11 @@ namespace HomeCorner.Models
 {
     public class House
     {
+        public House()
+        {
+            this.Features = new HashSet<Features>();
+        }
+
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -31,5 +37,6 @@ namespace HomeCorner.Models
 
         public Customer Owner { get; set; }
 
+        public virtual ICollection<Features> Features { get; set; }
     }
 }
