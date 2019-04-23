@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace HomeCorner.Models
 {
@@ -12,7 +14,7 @@ namespace HomeCorner.Models
             this.Houses = new HashSet<House>();
         }
         public byte Id { get; set; }
-        public string Description { get; set; }
+        public string Feature { get; set; }
         public virtual ICollection<House> Houses { get; set; }
     }
 }

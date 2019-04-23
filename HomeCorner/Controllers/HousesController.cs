@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HomeCorner.Models;
+using HomeCorner.ViewModels;
 using HomeCorner.Services;
 
 namespace HomeCorner.Controllers
@@ -51,11 +52,25 @@ namespace HomeCorner.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             House house = db.Houses.Find(id);
+            var features = house.Features;
+
             if (house == null)
             {
                 return HttpNotFound();
             }
-            return View(house);
+            
+            var FeaturesDetailsViewModel = new FeaturesDetailsViewModel();
+            {
+                FeaturesDetailsViewModel.House = house;
+                FeaturesDetailsViewModel.Features = features.ToList();
+            }
+
+            
+            //viewModel.ActionMovies = movies.Where(m => m.Genre.Name == "Action").ToList();
+            //viewModel.ThrillerMovies = movies.Where(m => m.Genre.Name == "Thriller").ToList();
+            
+
+            return View(FeaturesDetailsViewModel);
         }
 
         // GET: Houses/Edit/5
