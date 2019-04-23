@@ -13,7 +13,7 @@ namespace HomeCorner.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201904222121079_addFeatures"; }
+            get { return "201904231439417_addFeatures"; }
         }
         
         string IMigrationMetadata.Source

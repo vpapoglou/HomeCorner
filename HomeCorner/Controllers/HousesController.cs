@@ -14,6 +14,7 @@ namespace HomeCorner.Controllers
 {
     public class HousesController : Controller
     {
+
         private HomeCornerContext db = new HomeCornerContext();
 
         // GET: Houses
@@ -24,16 +25,22 @@ namespace HomeCorner.Controllers
         }
 
 
-        public ActionResult Create()
+        public ActionResult Create([Bind(Include = "Id, Feature")] Features features)
         {
-            //ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability");
-            return View();
+            var allFeatures = db.Features.ToList();
+            var HousesViewModel = new HousesViewModel();
+            {
+                HousesViewModel.Features = allFeatures;
+            }
+
+            return View(HousesViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, Region, Address, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability")] House house)
+        public ActionResult Create([Bind(Include = "Id, Region, Address, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability, Features")] House house)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Houses.Add(house);
@@ -43,6 +50,7 @@ namespace HomeCorner.Controllers
 
             return View();
         }
+
 
         // GET: Houses/Details/5
         public ActionResult Details(int? id)
@@ -59,10 +67,10 @@ namespace HomeCorner.Controllers
                 return HttpNotFound();
             }
             
-            var FeaturesDetailsViewModel = new FeaturesDetailsViewModel();
+            var HousesViewModel = new HousesViewModel();
             {
-                FeaturesDetailsViewModel.House = house;
-                FeaturesDetailsViewModel.Features = features.ToList();
+                HousesViewModel.House = house;
+                HousesViewModel.Features = features.ToList();
             }
 
             
@@ -70,7 +78,7 @@ namespace HomeCorner.Controllers
             //viewModel.ThrillerMovies = movies.Where(m => m.Genre.Name == "Thriller").ToList();
             
 
-            return View(FeaturesDetailsViewModel);
+            return View(HousesViewModel);
         }
 
         // GET: Houses/Edit/5
@@ -86,7 +94,13 @@ namespace HomeCorner.Controllers
                 return HttpNotFound();
             }
             //ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability", house.Id);
-            return View(house);
+            var allFeatures = db.Features.ToList();
+            var HousesViewModel = new HousesViewModel();
+            {
+                HousesViewModel.Features = allFeatures;
+            }
+
+            return View(HousesViewModel);
         }
 
         // POST: Houses/Edit/5
@@ -94,7 +108,7 @@ namespace HomeCorner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, Region, Address, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability")] House house)
+        public ActionResult Edit([Bind(Include = "Id, Region, Address, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability, Features")] House house)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +117,8 @@ namespace HomeCorner.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Id = new SelectList(db.Houses, "Id", "Title", house.Id);
-            return View(house);
+            var HousesViewModel = new HousesViewModel();
+            return View(HousesViewModel);
         }
 
         // GET: Houses/Delete/5

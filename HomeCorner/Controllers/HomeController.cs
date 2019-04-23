@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HomeCorner.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ namespace HomeCorner.Controllers
     {
         public ActionResult Index()
         {
+            
             return View();
         }
 
@@ -26,5 +28,7 @@ namespace HomeCorner.Controllers
 
             return View();
         }
+
+        
     }
 }

@@ -11,10 +11,13 @@ namespace HomeCorner.Models
     {
         public Features()
         {
+
             this.Houses = new HashSet<House>();
         }
         public byte Id { get; set; }
         public string Feature { get; set; }
+
         public virtual ICollection<House> Houses { get; set; }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@model HomeCorner.ViewModels.FeaturesDetailsViewModel
+﻿@model HomeCorner.ViewModels.HousesViewModel
 
 
 @{
@@ -15,12 +15,28 @@
 
         @Html.Partial("_HousesDataTable", Model.House)
 
-        @foreach (var features in Model.Features)
+        <dt>
+            @Html.DisplayNameFor(model => model.Features)
+        </dt>
+
+        @if (Model.Features.Count == 0)
         {
-            <dt>
-                @features.Feature;
-            </dt>
+            <dd>No Features</dd>
         }
-        </dl>
+        else
+        {
+            foreach (var feature in Model.Features)
+            {
+                <dt>
+                    @feature.Feature;
+                </dt>
+            }
+        }
+        <dt>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.House.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+
+        </dt>
+    </dl>
     </div>
         
