@@ -33,8 +33,11 @@
                 </div>
             </div>
         </div>
+        <div class="container mt-3 mb-3">
+            <div id="googleMap" style="width:100%;height:400px;"></div>
+        </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6 mt-5">
         <div class="contactus-form center-div">
             <form>
                 <div class="form-group">
@@ -59,3 +62,19 @@
     </div>
 </div>
 
+<script>
+    function initMap() {
+        var homeCornerLatLng = { lat: 40.6374681, lng: 22.9346953 };
+        var map = new google.maps.Map(document.getElementById('googleMap'), {
+            zoom: 6,
+            center: homeCornerLatLng
+        });
+        var marker = new google.maps.Marker({
+            position: homeCornerLatLng,
+            map: map,
+            title: 'Home Corner Offices'
+        });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi66Zr1c2Jqe-6NEqunYSDfF0DkJaC0_o&callback=initMap"></script>
