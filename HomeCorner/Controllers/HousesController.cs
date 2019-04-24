@@ -30,7 +30,7 @@ namespace HomeCorner.Controllers
             var allFeatures = db.Features.ToList();
             var HousesViewModel = new HousesViewModel();
             {
-                HousesViewModel.Features = allFeatures;
+                HousesViewModel.Features = allFeatures.ToList();
             }
 
             return View(HousesViewModel);
@@ -60,7 +60,7 @@ namespace HomeCorner.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             House house = db.Houses.Find(id);
-            var features = house.Features;
+            var features = house.Features.ToList();
 
             if (house == null)
             {
@@ -72,11 +72,6 @@ namespace HomeCorner.Controllers
                 HousesViewModel.House = house;
                 HousesViewModel.Features = features.ToList();
             }
-
-            
-            //viewModel.ActionMovies = movies.Where(m => m.Genre.Name == "Action").ToList();
-            //viewModel.ThrillerMovies = movies.Where(m => m.Genre.Name == "Thriller").ToList();
-            
 
             return View(HousesViewModel);
         }
@@ -93,11 +88,11 @@ namespace HomeCorner.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.Id = new SelectList(db.Houses, "Id", "Region", "Address", "Price", "OwnerId", "Title", "Description", "PostalCode", "Occupancy", "Availability", house.Id);
             var allFeatures = db.Features.ToList();
             var HousesViewModel = new HousesViewModel();
             {
-                HousesViewModel.Features = allFeatures;
+                HousesViewModel.House = house;
+                HousesViewModel.Features = allFeatures.ToList();
             }
 
             return View(HousesViewModel);
@@ -117,8 +112,7 @@ namespace HomeCorner.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Id = new SelectList(db.Houses, "Id", "Title", house.Id);
-            var HousesViewModel = new HousesViewModel();
-            return View(HousesViewModel);
+            return View();
         }
 
         // GET: Houses/Delete/5
