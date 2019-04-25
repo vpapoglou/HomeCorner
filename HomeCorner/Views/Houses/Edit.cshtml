@@ -91,10 +91,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Features)
+            @Html.LabelFor(m => m.AllFeatures, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Features, new SelectList(Model.Features, "Id", "Feature"), "Select Features", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Features)
+                @Html.ListBoxFor(m => m.SelectedFeatures, Model.AllFeatures)
             </div>
         </div>
 

@@ -27,11 +27,17 @@ namespace HomeCorner.Controllers
 
         public ActionResult Create([Bind(Include = "Id, Feature")] Features features)
         {
-            var allFeatures = db.Features.ToList();
+            var allFeaturesList = db.Features.ToList();
             var HousesViewModel = new HousesViewModel();
             {
-                HousesViewModel.Features = allFeatures.ToList();
+                
             }
+
+            HousesViewModel.AllFeatures = allFeaturesList.Select(o => new SelectListItem
+            {
+                Text = o.Feature.ToString(),
+                Value = o.Id.ToString()
+            });
 
             return View(HousesViewModel);
         }
@@ -60,7 +66,7 @@ namespace HomeCorner.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             House house = db.Houses.Find(id);
-            var features = house.Features.ToList();
+            var allFeaturesList = house.Features.ToList();
 
             if (house == null)
             {
@@ -70,8 +76,14 @@ namespace HomeCorner.Controllers
             var HousesViewModel = new HousesViewModel();
             {
                 HousesViewModel.House = house;
-                HousesViewModel.Features = features.ToList();
+                
             }
+
+            HousesViewModel.AllFeatures = allFeaturesList.Select(o => new SelectListItem
+            {
+                Text = o.Feature.ToString(),
+                Value = o.Id.ToString()
+            });
 
             return View(HousesViewModel);
         }
@@ -88,12 +100,24 @@ namespace HomeCorner.Controllers
             {
                 return HttpNotFound();
             }
-            var allFeatures = db.Features.ToList();
+            //var allFeatures = db.Features.ToList();
             var HousesViewModel = new HousesViewModel();
             {
-                HousesViewModel.House = house;
-                HousesViewModel.Features = allFeatures.ToList();
+                HousesViewModel.House = db.Houses.Include(i => i.Features).First(i => i.Id == id);
+                //HousesViewModel.Features = allFeatures.ToList();
             }
+            if (HousesViewModel.House == null)
+                return HttpNotFound();
+
+            var allFeaturesList = db.Features.ToList();
+            HousesViewModel.AllFeatures = allFeaturesList.Select(o => new SelectListItem
+            {
+                Text = o.Feature.ToString(),
+                Value = o.Id.ToString()
+            });
+
+            //ViewBag.CustomerID =
+            //        new SelectList(db.Customers, "Id", "Name", HousesViewModel.House.Id);
 
             return View(HousesViewModel);
         }

@@ -17,20 +17,20 @@
         @Html.Partial("_HousesDataTable", Model.House)
 
         <dt>
-            @Html.DisplayNameFor(model => model.Features)
+            @Html.DisplayNameFor(model => model.AllFeatures)
         </dt>
 
-        @if (Model.Features.Count == 0)
+        @if (Model.AllFeatures == null)
         {
             <dd>No Features</dd>
         }
         else
         {
-            foreach (var feature in Model.Features)
+            foreach (var feature in Model.SelectedFeatures)
             {
-                <dt>
-                    @feature.Feature;
-                </dt>
+            <dt>
+                @Html.ListBox("Id", new SelectList(Model.AllFeatures, "Id", "Feature"))
+            </dt>
             }
         }
         <dt>
