@@ -26,5 +26,10 @@ namespace HomeCorner.ViewModels
             set { _selectedFeatures = value; }
 
         }
+
+        public HousesViewModel()
+        {
+            AllFeatures = new List<SelectListItem>();
+        }
     }
 }

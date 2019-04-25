@@ -26,12 +26,9 @@
         }
         else
         {
-            foreach (var feature in Model.SelectedFeatures)
-            {
-            <dt>
+            <dd>
                 @Html.ListBox("Id", new SelectList(Model.AllFeatures, "Id", "Feature"))
-            </dt>
-            }
+            </dd>
         }
         <dt>
             @Html.ActionLink("Edit", "Edit", new { id = Model.House.Id }) |
