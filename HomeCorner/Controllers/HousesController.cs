@@ -25,7 +25,7 @@ namespace HomeCorner.Controllers
         }
 
 
-        public ActionResult Create([Bind(Include = "Id, Feature")] Features features)
+        public ActionResult Create()
         {
             var allFeaturesList = db.Features.ToList();
             var HousesViewModel = new HousesViewModel();
@@ -33,28 +33,48 @@ namespace HomeCorner.Controllers
                 
             }
 
-            HousesViewModel.AllFeatures = allFeaturesList.Select(o => new SelectListItem
+            ViewBag.AllFeatures = allFeaturesList.Select(o => new SelectListItem
             {
                 Text = o.Feature.ToString(),
                 Value = o.Id.ToString()
             });
 
-            return View(HousesViewModel);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, Region, Address, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability, Features")] House house)
+        public ActionResult Create(HousesViewModel housesViewModel)
         {
             
             if (ModelState.IsValid)
             {
-                db.Houses.Add(house);
+                var houseToAdd = db.Houses
+                .Include(i => i.Features)
+                .First();
+
+                if (TryUpdateModel(houseToAdd, "house", new string[] { "Id", "Feature" }))
+                {
+                    var updatedFeatures = new HashSet<byte>(housesViewModel.SelectedFeatures);
+
+                    foreach (Features features in db.Features)
+                    {
+                        if (!updatedFeatures.Contains(features.Id))
+                        {
+                            houseToAdd.Features.Remove(features);
+                        }
+                        else
+                        {
+                            houseToAdd.Features.Add((features));
+                        }
+                    }
+                }
+                db.Houses.Add(houseToAdd);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View();
+            return View(housesViewModel);
         }
 
 
@@ -65,25 +85,18 @@ namespace HomeCorner.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            House house = db.Houses.Find(id);
-            var allFeaturesList = house.Features.ToList();
-
-            if (house == null)
-            {
-                return HttpNotFound();
-            }
             
             var HousesViewModel = new HousesViewModel();
             {
-                HousesViewModel.House = house;
-                
+                HousesViewModel.House = db.Houses.Include(i => i.Features).First(i => i.Id == id);
             }
 
-            HousesViewModel.AllFeatures = allFeaturesList.Select(o => new SelectListItem
+            if (HousesViewModel.House == null)
             {
-                Text = o.Feature.ToString(),
-                Value = o.Id.ToString()
-            });
+                return HttpNotFound();
+            }
+            var allFeaturesList = HousesViewModel.House.Features.ToList();
+
 
             return View(HousesViewModel);
         }

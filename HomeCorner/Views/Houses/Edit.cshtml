@@ -91,7 +91,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.AllFeatures, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.AllFeatures, "Features", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.ListBoxFor(m => m.SelectedFeatures, Model.AllFeatures)
             </div>
