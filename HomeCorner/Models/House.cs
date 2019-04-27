@@ -20,7 +20,7 @@ namespace HomeCorner.Models
         public string Description { get; set; }
 
         //[Required(ErrorMessage = "Please, provide a Region")]
-        public string Region { get; set; }
+        //public string Region { get; set; }
 
         //[Required(ErrorMessage = "Please, provide an Address")]
         public string Address { get; set; }
@@ -36,6 +36,10 @@ namespace HomeCorner.Models
         public int OwnerId { get; set; }
 
         public virtual Customer Owner { get; set; }
+
+        public byte RegionId { get; set; }
+
+        public virtual Region Region { get; set; }
 
         public virtual ICollection<Features> Features { get; set; }
     }

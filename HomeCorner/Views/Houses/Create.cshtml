@@ -33,11 +33,10 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.House.Region, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.House.Region, new { htmlAttributes = new { placeholder = "enter the region", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.House.Region, "", new { @class = "text-danger" })
-        </div>
+        @Html.LabelFor(model => model.House.Region, "Regions", new { @class = "control-label col-md-2" })
+        
+        @Html.DropDownListFor(model => model.House.RegionId, new SelectList(Model.Region, "RegionId", "RegionName"), "Select Region", new { @class = "form-control" } )
+
     </div>
 
     <div class="form-group">

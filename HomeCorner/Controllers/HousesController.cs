@@ -28,10 +28,7 @@ namespace HomeCorner.Controllers
         public ActionResult Create()
         {
             var allFeaturesList = db.Features.ToList();
-            var HousesViewModel = new HousesViewModel();
-            {
-                
-            }
+            var allRegions = db.Regions.ToList();
 
             ViewBag.AllFeatures = allFeaturesList.Select(o => new SelectListItem
             {
@@ -56,6 +53,7 @@ namespace HomeCorner.Controllers
                 if (TryUpdateModel(houseToAdd, "house", new string[] { "Id", "Feature" }))
                 {
                     var updatedFeatures = new HashSet<byte>(housesViewModel.SelectedFeatures);
+                    houseToAdd = housesViewModel.House;
 
                     foreach (Features features in db.Features)
                     {

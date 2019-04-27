@@ -28,6 +28,8 @@ namespace HomeCorner.Models
 
 		public DbSet<Features> Features { get; set; }
 
+		public DbSet<Region> Regions { get; set; }
+
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			// configures one-to-many relationship
@@ -36,6 +38,13 @@ namespace HomeCorner.Models
 				.WithMany(g => g.Houses)
 				.HasForeignKey<int>(s => s.OwnerId)
 				.WillCascadeOnDelete();
+
+			modelBuilder.Entity<House>()
+				.HasRequired<Region>(s => s.Region)
+				.WithMany(g => g.Houses)
+				.HasForeignKey<byte>(s => s.RegionId)
+				.WillCascadeOnDelete();
 		}
+
 	}
 }
