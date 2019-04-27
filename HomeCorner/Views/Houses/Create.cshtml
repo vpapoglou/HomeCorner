@@ -33,11 +33,11 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.House.Region, "Regions", new { @class = "control-label col-md-2" })
-        
-        @Html.DropDownListFor(model => model.House.RegionId, new SelectList(Model.Region, "RegionId", "RegionName"), "Select Region", new { @class = "form-control" } )
-
-    </div>
+        @Html.LabelFor(model => model.AllRegions, "Regions", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.AllRegions, (IEnumerable<SelectListItem>)ViewBag.AllRegions, "Select Region", new { @class = "form-control" })
+        </div>
+     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.House.Address, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -87,9 +87,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.AllFeatures, "Features", new { @class = "control-label col-md-2" })        <div class="col-md-10">
-
-        @Html.ListBoxFor(m => m.SelectedFeatures, (IEnumerable<SelectListItem>)ViewBag.AllFeatures, new { @class = "form-control" })
+        @Html.LabelFor(m => m.AllFeatures, "Features", new { @class = "control-label col-md-2" })        
+        <div class="col-md-10">
+        @Html.ListBoxFor(m => m.AllFeatures, (IEnumerable<SelectListItem>)ViewBag.AllFeatures, new { @class = "form-control" })
        </div>
     </div>
 

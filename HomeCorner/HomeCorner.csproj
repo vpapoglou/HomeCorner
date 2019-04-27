@@ -181,6 +181,10 @@
     <Compile Include="Migrations\201904271806068_Initial4.Designer.cs">
       <DependentUpon>201904271806068_Initial4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904271835463_addRegions.cs" />
+    <Compile Include="Migrations\201904271835463_addRegions.Designer.cs">
+      <DependentUpon>201904271835463_addRegions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Features.cs" />
@@ -322,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904271806068_Initial4.resx">
       <DependentUpon>201904271806068_Initial4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904271835463_addRegions.resx">
+      <DependentUpon>201904271835463_addRegions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

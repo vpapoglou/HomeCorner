@@ -28,12 +28,16 @@ namespace HomeCorner.Controllers
         public ActionResult Create()
         {
             var allFeaturesList = db.Features.ToList();
-            var allRegions = db.Regions.ToList();
-
+            var allRegionsList = db.Regions.ToList();
             ViewBag.AllFeatures = allFeaturesList.Select(o => new SelectListItem
             {
                 Text = o.Feature.ToString(),
                 Value = o.Id.ToString()
+            });
+            ViewBag.AllRegions = allRegionsList.Select(o => new SelectListItem
+            {
+                Text = o.RegionName.ToString(),
+                Value = o.RegionId.ToString()
             });
 
             return View();
@@ -48,11 +52,14 @@ namespace HomeCorner.Controllers
             {
                 var houseToAdd = db.Houses
                 .Include(i => i.Features)
+                .Include(y => y.Region)
                 .First();
 
-                if (TryUpdateModel(houseToAdd, "house", new string[] { "Id", "Feature" }))
+                if (TryUpdateModel(houseToAdd, "house", new string[] { "Id", "Region", "Feature" }))
                 {
                     var updatedFeatures = new HashSet<byte>(housesViewModel.SelectedFeatures);
+                    var updatedRegion = housesViewModel.SelectedRegion;
+
                     houseToAdd = housesViewModel.House;
 
                     foreach (Features features in db.Features)
