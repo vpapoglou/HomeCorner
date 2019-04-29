@@ -27,14 +27,14 @@ namespace HomeCorner.ViewModels
             set { _selectedFeatures = value; }
 
         }
-        private string _selectedRegion;
-        public string SelectedRegion
+        private byte? _selectedRegion;
+        public byte? SelectedRegion
         {
             get
             {
                 if (_selectedRegion == null)
                 {
-                    _selectedRegion = House.Region.RegionName;
+                    _selectedRegion = House.Region.RegionId;
                 }
                 return _selectedRegion;
             }

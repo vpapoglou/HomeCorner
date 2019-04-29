@@ -73,6 +73,14 @@ namespace HomeCorner.Controllers
                             houseToAdd.Features.Add((features));
                         }
                     }
+
+                    foreach (Region region in db.Regions)
+                    {
+                        if (updatedRegion==region.RegionId)
+                        {
+                            houseToAdd.Region = region;
+                        }
+                    }
                 }
                 db.Houses.Add(houseToAdd);
                 db.SaveChanges();
