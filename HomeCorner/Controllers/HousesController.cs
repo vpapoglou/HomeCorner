@@ -27,18 +27,15 @@ namespace HomeCorner.Controllers
 
         public ActionResult Create()
         {
+            var housesViewModel = new HousesViewModel();
             var allFeaturesList = db.Features.ToList();
-            var allRegionsList = db.Regions.ToList();
+            //var allRegionsList = db.Regions.ToList();
             ViewBag.AllFeatures = allFeaturesList.Select(o => new SelectListItem
             {
                 Text = o.Feature.ToString(),
                 Value = o.Id.ToString()
             });
-            ViewBag.AllRegions = allRegionsList.Select(o => new SelectListItem
-            {
-                Text = o.RegionName.ToString(),
-                Value = o.RegionId.ToString()
-            });
+            ViewBag.RegionId = new SelectList(db.Regions, "RegionId", "RegionName");
 
             return View();
         }
@@ -50,42 +47,48 @@ namespace HomeCorner.Controllers
             
             if (ModelState.IsValid)
             {
-                var houseToAdd = db.Houses
-                .Include(i => i.Features)
-                .Include(y => y.Region)
-                .First();
+                //var houseToAdd = db.Houses
+                //.Include(i => i.Features)
+                //.First();
+                var houseToAdd = housesViewModel;
+                //var houseToAdd = new House();
 
-                if (TryUpdateModel(houseToAdd, "house", new string[] { "Id", "Region", "Feature" }))
+                /*if (db.Houses is null)
+                {
+                    houseToAdd.Availability = DateTime.Now;
+                    db.Houses.Add(houseToAdd);
+                }*/
+                if (TryUpdateModel(houseToAdd, "house", new string[] { "Id", "Features", "RegionId" }))
                 {
                     var updatedFeatures = new HashSet<byte>(housesViewModel.SelectedFeatures);
-                    var updatedRegion = housesViewModel.SelectedRegion;
-
-                    houseToAdd = housesViewModel.House;
+                    //var updatedRegion = housesViewModel.SelectedRegion;
 
                     foreach (Features features in db.Features)
                     {
                         if (!updatedFeatures.Contains(features.Id))
                         {
-                            houseToAdd.Features.Remove(features);
+                            houseToAdd.House.Features.Remove(features);
                         }
                         else
                         {
-                            houseToAdd.Features.Add((features));
+                            houseToAdd.House.Features.Add((features));
                         }
                     }
 
-                    foreach (Region region in db.Regions)
+                    /*foreach (Region region in db.Regions)
                     {
                         if (updatedRegion==region.RegionId)
                         {
                             houseToAdd.Region = region;
                         }
-                    }
+                    }*/
                 }
-                db.Houses.Add(houseToAdd);
+                db.Houses.Add(houseToAdd.House);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.RegionId = new SelectList(db.Regions, "RegionId", "RegionName");
 
             return View(housesViewModel);
         }
@@ -108,7 +111,7 @@ namespace HomeCorner.Controllers
             {
                 return HttpNotFound();
             }
-            var allFeaturesList = HousesViewModel.House.Features.ToList();
+            //var allFeaturesList = HousesViewModel.House.Features.ToList();
 
 
             return View(HousesViewModel);
@@ -121,31 +124,31 @@ namespace HomeCorner.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            House house = db.Houses.Find(id);
-            if (house == null)
-            {
-                return HttpNotFound();
-            }
+            //House house = db.Houses.Find(id);
+            //if (house == null)
+            //{
+            //    return HttpNotFound();
+            //}
             //var allFeatures = db.Features.ToList();
-            var HousesViewModel = new HousesViewModel();
+            var housesViewModel = new HousesViewModel();
             {
-                HousesViewModel.House = db.Houses.Include(i => i.Features).First(i => i.Id == id);
+                housesViewModel.House = db.Houses.Include(i => i.Features).SingleOrDefault(i => i.Id == id);
                 //HousesViewModel.Features = allFeatures.ToList();
             }
-            if (HousesViewModel.House == null)
+            if (housesViewModel.House == null)
                 return HttpNotFound();
 
             var allFeaturesList = db.Features.ToList();
-            HousesViewModel.AllFeatures = allFeaturesList.Select(o => new SelectListItem
+            ViewBag.AllFeatures = allFeaturesList.Select(o => new SelectListItem
             {
                 Text = o.Feature.ToString(),
                 Value = o.Id.ToString()
             });
 
-            //ViewBag.CustomerID =
-            //        new SelectList(db.Customers, "Id", "Name", HousesViewModel.House.Id);
+            ViewBag.RegionId =
+                    new SelectList(db.Regions, "RegionId", "RegionName");
 
-            return View(HousesViewModel);
+            return View(housesViewModel);
         }
 
         // POST: Houses/Edit/5
@@ -153,16 +156,35 @@ namespace HomeCorner.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, Region, Address, Price, OwnerId, Title, Description, PostalCode, Occupancy, Availability, Features")] House house)
+        public ActionResult Edit(HousesViewModel housesViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(house).State = EntityState.Modified;
+                var houseToAdd = housesViewModel;
+                if (TryUpdateModel(houseToAdd, "house", new string[] { "Id", "Features", "RegionId" }))
+                {
+                    var updatedFeatures = new HashSet<byte>(housesViewModel.SelectedFeatures);
+                    //var updatedRegion = housesViewModel.SelectedRegion;
+
+                    foreach (Features features in db.Features)
+                    {
+                        if (!updatedFeatures.Contains(features.Id))
+                        {
+                            houseToAdd.House.Features.Remove(features);
+                        }
+                        else
+                        {
+                            houseToAdd.House.Features.Add((features));
+                        }
+                    }
+                }
+                db.Entry(houseToAdd.House).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.Houses, "Id", "Title", house.Id);
-            return View();
+            //ViewBag.Id = new SelectList(db.Houses, "Id", "Title", housesViewModel.House.Id);
+            ViewBag.RegionId = new SelectList(db.Regions, "RegionId", "RegionName");
+            return View(housesViewModel);
         }
 
         // GET: Houses/Delete/5

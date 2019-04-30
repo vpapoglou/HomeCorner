@@ -20,16 +20,17 @@
             @Html.DisplayNameFor(model => model.AllFeatures)
         </dt>
 
-        @if (Model.AllFeatures == null)
+        @if (Model.SelectedFeatures == null)
         {
             <dd>No Features</dd>
         }
         else
         {
-            foreach (var feature in Model.SelectedFeatures)
+            
+            foreach (var feature in Model.House.Features)
             {
             <dd>
-                @Html.ListBox("Id", new SelectList(Model.AllFeatures, "Id", "Feature"))
+                @Html.DisplayFor(model =>feature.Feature)
             </dd>
             }
         }

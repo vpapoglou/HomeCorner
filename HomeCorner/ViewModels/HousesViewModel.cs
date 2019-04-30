@@ -10,7 +10,7 @@ namespace HomeCorner.ViewModels
     public class HousesViewModel
     {
         public House House { get; set; }  //oxi lista giati mas endiaferei sto details kai sta ypoloipa views na emfanizetai mono ena spiti kai ola ta features tou kai oxi ola ta spitia mazi
-        public IEnumerable<SelectListItem> AllRegions { get; set; }
+        //public Region Region { get; set; }
         public IEnumerable<SelectListItem> AllFeatures { get; set; }
 
         private List<byte> _selectedFeatures;
@@ -27,7 +27,7 @@ namespace HomeCorner.ViewModels
             set { _selectedFeatures = value; }
 
         }
-        private byte? _selectedRegion;
+        /*private byte? _selectedRegion;
         public byte? SelectedRegion
         {
             get
@@ -38,13 +38,13 @@ namespace HomeCorner.ViewModels
                 }
                 return _selectedRegion;
             }
-            set { _selectedRegion = value; }
+            set { _selectedRegion = House.Region.RegionId; }
 
-        }
+        }*/
         public HousesViewModel()
         {
             AllFeatures = new List<SelectListItem>();
-            AllRegions = new List<SelectListItem>();
+            
         }
     }
 }
