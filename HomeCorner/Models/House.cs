@@ -31,7 +31,9 @@ namespace HomeCorner.Models
 
         public decimal Price { get; set; }
 
-        public DateTime Availability { get; set; }
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
 
         public int OwnerId { get; set; }
 
