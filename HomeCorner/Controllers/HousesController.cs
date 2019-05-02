@@ -161,7 +161,7 @@ namespace HomeCorner.Controllers
             if (ModelState.IsValid)
             {
                 var houseToAdd = housesViewModel;
-                if (TryUpdateModel(houseToAdd, "house", new string[] { "Id", "Features", "RegionId" }))
+                if (TryUpdateModel(houseToAdd, "house", new string[] {"Features", "RegionId" }))
                 {
                     var updatedFeatures = new HashSet<byte>(housesViewModel.SelectedFeatures);
                     //var updatedRegion = housesViewModel.SelectedRegion;
