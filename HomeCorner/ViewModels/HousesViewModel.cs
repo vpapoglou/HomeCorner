@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace HomeCorner.ViewModels
 {
     public class HousesViewModel
-    {
+    {        
         public House House { get; set; }  //oxi lista giati mas endiaferei sto details kai sta ypoloipa views na emfanizetai mono ena spiti kai ola ta features tou kai oxi ola ta spitia mazi
         //public Region Region { get; set; }
         public IEnumerable<SelectListItem> AllFeatures { get; set; }
@@ -27,20 +27,21 @@ namespace HomeCorner.ViewModels
             set { _selectedFeatures = value; }
 
         }
-        /*private byte? _selectedRegion;
-        public byte? SelectedRegion
-        {
-            get
-            {
-                if (_selectedRegion == null)
-                {
-                    _selectedRegion = House.Region.RegionId;
-                }
-                return _selectedRegion;
-            }
-            set { _selectedRegion = House.Region.RegionId; }
 
-        }*/
+        /*private byte? _selectedRegion;
+public byte? SelectedRegion
+{
+get
+{
+if (_selectedRegion == null)
+{
+_selectedRegion = House.Region.RegionId;
+}
+return _selectedRegion;
+}
+set { _selectedRegion = House.Region.RegionId; }
+
+}*/
         public HousesViewModel()
         {
             AllFeatures = new List<SelectListItem>();

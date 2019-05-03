@@ -29,6 +29,7 @@ namespace HomeCorner.Models
 		public DbSet<Features> Features { get; set; }
 
 		public DbSet<Region> Regions { get; set; }
+		public object Images { get; internal set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
@@ -44,7 +45,12 @@ namespace HomeCorner.Models
 				.WithMany(g => g.Houses)
 				.HasForeignKey<byte>(s => s.RegionId)
 				.WillCascadeOnDelete();
-		}
 
+			modelBuilder.Entity<Images>()
+				.HasRequired<House>(s => s.House)
+				.WithMany(g => g.Images)
+				.HasForeignKey<int>(s => s.HouseId)
+				.WillCascadeOnDelete();
+		}
 	}
 }

@@ -18,7 +18,6 @@ namespace HomeCorner.Controllers
     {
 
         private HomeCornerContext db = new HomeCornerContext();
-        //private IEnumerable<object> houseImages;
 
         // GET: Houses
         public ActionResult Index()
@@ -39,7 +38,6 @@ namespace HomeCorner.Controllers
                 Value = o.Id.ToString()
             });
             ViewBag.RegionId = new SelectList(db.Regions, "RegionId", "RegionName");
-            //ViewBag.houseImages = new SelectList(db.Images, "Id", "ImagePath");
 
             return View();
         }
@@ -63,8 +61,6 @@ namespace HomeCorner.Controllers
                     houseToAdd.Availability = DateTime.Now;
                     db.Houses.Add(houseToAdd);
                 }*/
-
-
 
                 if (TryUpdateModel(houseToAdd, "house", new string[] { "Id", "Features", "RegionId" }))
                 {

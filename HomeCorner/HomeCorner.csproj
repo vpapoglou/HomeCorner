@@ -193,6 +193,10 @@
     <Compile Include="Migrations\201905030028531_ImagesTable.Designer.cs">
       <DependentUpon>201905030028531_ImagesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905031151313_AddedOneToManyRelationToImages.cs" />
+    <Compile Include="Migrations\201905031151313_AddedOneToManyRelationToImages.Designer.cs">
+      <DependentUpon>201905031151313_AddedOneToManyRelationToImages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Features.cs" />
@@ -345,6 +349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905030028531_ImagesTable.resx">
       <DependentUpon>201905030028531_ImagesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905031151313_AddedOneToManyRelationToImages.resx">
+      <DependentUpon>201905031151313_AddedOneToManyRelationToImages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
