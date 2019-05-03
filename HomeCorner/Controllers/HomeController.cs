@@ -7,15 +7,20 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using HomeCorner.ViewModels;
+
 
 namespace HomeCorner.Controllers
 {
     public class HomeController : Controller
     {
+        private HomeCornerContext db = new HomeCornerContext();
+
         public ActionResult Index()
         {
+            var latestHouses = db.Houses.OrderByDescending(house => house.Id).Take(6);
 
-            return View();
+            return View(latestHouses);
         }
 
         public ActionResult AboutUs()
