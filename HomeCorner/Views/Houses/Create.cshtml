@@ -7,10 +7,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2>Create</h2>
 
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Houses", FormMethod.Post, new
+{
+    enctype = "multipart/form-data"
+}))
 {
     @Html.AntiForgeryToken()
 
@@ -75,7 +78,7 @@
         </div>
 
         <div class="form-group">
-            <label class = "control-label col-md-2">Availabilty</label>
+            <label class="control-label col-md-2">Availabilty</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.House.StartDate, new { htmlAttributes = new { placeholder = "From", @class = "form-control", id = "StartDate" } })
                 @Html.ValidationMessageFor(model => model.House.StartDate, "", new { @class = "text-danger" })
@@ -100,10 +103,16 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.Label("Image", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="houseImages" name="upload" multiple />
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary" id="submit-create-house">Create</button>
             </div>
         </div>
     </div>
@@ -114,9 +123,9 @@
 </div>
 
 @section Scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
-
 
     <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/js/gijgo.min.js" type="text/javascript"></script>
     <script>

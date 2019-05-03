@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-
+using System.Web;
 
 namespace HomeCorner.Models
 {
@@ -44,5 +45,7 @@ namespace HomeCorner.Models
         public virtual Region Region { get; set; }
 
         public virtual ICollection<Features> Features { get; set; }
+
+        public virtual ICollection<Images> Images { get; set; }
     }
 }

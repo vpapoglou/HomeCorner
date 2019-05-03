@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using HomeCorner.Models;
 using HomeCorner.ViewModels;
 using HomeCorner.Services;
+using System.IO;
+using System.Configuration;
 
 namespace HomeCorner.Controllers
 {
@@ -16,6 +18,7 @@ namespace HomeCorner.Controllers
     {
 
         private HomeCornerContext db = new HomeCornerContext();
+        //private IEnumerable<object> houseImages;
 
         // GET: Houses
         public ActionResult Index()
@@ -36,6 +39,7 @@ namespace HomeCorner.Controllers
                 Value = o.Id.ToString()
             });
             ViewBag.RegionId = new SelectList(db.Regions, "RegionId", "RegionName");
+            //ViewBag.houseImages = new SelectList(db.Images, "Id", "ImagePath");
 
             return View();
         }
@@ -43,8 +47,9 @@ namespace HomeCorner.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(HousesViewModel housesViewModel)
+        //public ActionResult Create(HousesViewModel housesViewModel, Images images)
         {
-            
+
             if (ModelState.IsValid)
             {
                 //var houseToAdd = db.Houses
@@ -58,6 +63,9 @@ namespace HomeCorner.Controllers
                     houseToAdd.Availability = DateTime.Now;
                     db.Houses.Add(houseToAdd);
                 }*/
+
+
+
                 if (TryUpdateModel(houseToAdd, "house", new string[] { "Id", "Features", "RegionId" }))
                 {
                     var updatedFeatures = new HashSet<byte>(housesViewModel.SelectedFeatures);
@@ -82,9 +90,34 @@ namespace HomeCorner.Controllers
                             houseToAdd.Region = region;
                         }
                     }*/
+
                 }
                 db.Houses.Add(houseToAdd.House);
                 db.SaveChanges();
+
+                List<Images> imageDetails = new List<Images>();
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    var imageFile = Request.Files[i];
+                    if (imageFile != null && imageFile.ContentLength > 0)
+                    {
+                        var imageName = Path.GetFileName(imageFile.FileName);
+                        Images imageDetail = new Images()
+                        {
+                            ImageName = imageName,
+                            Extension = Path.GetExtension(imageName),
+                            Id = Guid.NewGuid()
+                        };
+
+                        imageDetails.Add(imageDetail);
+                        var path = Path.Combine(Server.MapPath("/HouseImages"), imageDetail.Id + imageDetail.Extension);
+                        imageFile.SaveAs(path);
+                    }
+                }
+                //db.Houses.Add(houseToAdd.House);
+                db.SaveChanges();
+
+
                 return RedirectToAction("Index");
             }
 
@@ -101,7 +134,7 @@ namespace HomeCorner.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             var HousesViewModel = new HousesViewModel();
             {
                 HousesViewModel.House = db.Houses.Include(i => i.Features).First(i => i.Id == id);
@@ -145,8 +178,7 @@ namespace HomeCorner.Controllers
                 Value = o.Id.ToString()
             });
 
-            ViewBag.RegionId =
-                    new SelectList(db.Regions, "RegionId", "RegionName");
+            ViewBag.RegionId = new SelectList(db.Regions, "RegionId", "RegionName");
 
             return View(housesViewModel);
         }
@@ -161,7 +193,7 @@ namespace HomeCorner.Controllers
             if (ModelState.IsValid)
             {
                 var houseToAdd = housesViewModel;
-                if (TryUpdateModel(houseToAdd, "house", new string[] {"Features", "RegionId" }))
+                if (TryUpdateModel(houseToAdd, "house", new string[] { "Features", "RegionId" }))
                 {
                     var updatedFeatures = new HashSet<byte>(housesViewModel.SelectedFeatures);
                     //var updatedRegion = housesViewModel.SelectedRegion;
@@ -184,6 +216,7 @@ namespace HomeCorner.Controllers
             }
             //ViewBag.Id = new SelectList(db.Houses, "Id", "Title", housesViewModel.House.Id);
             ViewBag.RegionId = new SelectList(db.Regions, "RegionId", "RegionName");
+
             return View(housesViewModel);
         }
 
@@ -221,5 +254,6 @@ namespace HomeCorner.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

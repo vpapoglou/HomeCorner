@@ -189,11 +189,16 @@
     <Compile Include="Migrations\201905011052155_Initial5.Designer.cs">
       <DependentUpon>201905011052155_Initial5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905030028531_ImagesTable.cs" />
+    <Compile Include="Migrations\201905030028531_ImagesTable.Designer.cs">
+      <DependentUpon>201905030028531_ImagesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Features.cs" />
     <Compile Include="Models\HomeCornerContext.cs" />
     <Compile Include="Models\House.cs" />
+    <Compile Include="Models\Images.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CustomerDb.cs" />
@@ -292,6 +297,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="HouseImages\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
@@ -336,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905011052155_Initial5.resx">
       <DependentUpon>201905011052155_Initial5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905030028531_ImagesTable.resx">
+      <DependentUpon>201905030028531_ImagesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
