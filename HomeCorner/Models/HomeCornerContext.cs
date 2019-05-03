@@ -12,7 +12,7 @@ namespace HomeCorner.Models
 	public class HomeCornerContext : DbContext
 	{
 		// We need to replace this value with the appropriate value that points to the local database
-		const string connectionString = @"Data Source=DESKTOP-M08V3JF\SQLEXPRESS;Initial Catalog=HomeCorner;Integrated Security=True";
+		const string connectionString = @"Data Source=DESKTOP-G20562D\SQLEXPRESS;Initial Catalog=HomeCorner;Integrated Security=True";
 
 		public HomeCornerContext() : base(connectionString) { }
 
@@ -29,7 +29,7 @@ namespace HomeCorner.Models
 		public DbSet<Features> Features { get; set; }
 
 		public DbSet<Region> Regions { get; set; }
-		public object Images { get; internal set; }
+		public DbSet<Images> Images { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{

@@ -4,14 +4,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section Scripts {
-    @Scripts.Render("~/bundles/lib")
-    <script>
-        $(document).ready(function () {
-            $("#houses").DataTable();
-        })
-    </script>
-}
 
 <h2>Houses</h2>
 
@@ -27,6 +19,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Images)
+            </th>
 
         </tr>
     </thead>
@@ -40,6 +38,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region.RegionName)
+                </td>
+                <td>
+                    <img src="/Houses/RetrieveImage/@item.Id" alt="" height=100 width=200 />
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

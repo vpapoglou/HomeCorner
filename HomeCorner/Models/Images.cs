@@ -18,5 +18,6 @@ namespace HomeCorner.Models
 
         public int HouseId { get; set; }
         public virtual House House { get; set; }
+        public byte[] byteImage { get; set; }
     }
 }

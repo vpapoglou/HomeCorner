@@ -17,6 +17,14 @@
         @Html.Partial("_HousesDataTable", Model.House)
 
         <dt>
+            @Html.DisplayNameFor(model => model.House.Region.RegionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.House.Region.RegionName)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.AllFeatures)
         </dt>
 
@@ -26,12 +34,12 @@
         }
         else
         {
-            
+
             foreach (var feature in Model.House.Features)
             {
-            <dd>
-                @Html.DisplayFor(model =>feature.Feature)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => feature.Feature)
+                </dd>
             }
         }
         <dt>

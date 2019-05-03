@@ -60,13 +60,16 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -197,6 +200,10 @@
     <Compile Include="Migrations\201905031151313_AddedOneToManyRelationToImages.Designer.cs">
       <DependentUpon>201905031151313_AddedOneToManyRelationToImages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905032143192_ImageBytes.cs" />
+    <Compile Include="Migrations\201905032143192_ImageBytes.Designer.cs">
+      <DependentUpon>201905032143192_ImageBytes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Features.cs" />
@@ -298,6 +305,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_HousesDataTable.cshtml" />
+    <Content Include="Views\Houses\UploadImages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -352,6 +360,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905031151313_AddedOneToManyRelationToImages.resx">
       <DependentUpon>201905031151313_AddedOneToManyRelationToImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905032143192_ImageBytes.resx">
+      <DependentUpon>201905032143192_ImageBytes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

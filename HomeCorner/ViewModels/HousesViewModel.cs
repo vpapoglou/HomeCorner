@@ -10,9 +10,13 @@ namespace HomeCorner.ViewModels
     public class HousesViewModel
     {        
         public House House { get; set; }  //oxi lista giati mas endiaferei sto details kai sta ypoloipa views na emfanizetai mono ena spiti kai ola ta features tou kai oxi ola ta spitia mazi
-        //public Region Region { get; set; }
+        /// Gets or sets Image file.
+        public Images Images { get; set; }
         public IEnumerable<SelectListItem> AllFeatures { get; set; }
-
+        /// <summary>  
+        /// Gets or sets Image file list.  
+        /// </summary>  
+        public byte[] Image { get; set; }
         private List<byte> _selectedFeatures;
         public List<byte> SelectedFeatures
         {
